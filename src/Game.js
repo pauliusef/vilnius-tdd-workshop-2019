@@ -1,9 +1,15 @@
 import React from 'react';
-export const Game = ({ player1, player2, board, onCellClicked }) => {
+export const Game = ({
+  player1,
+  player2,
+  activePlayer,
+  board,
+  onCellClicked
+}) => {
   return (
-    <div>
-      <h1 data-testid="player1-title">{player1}</h1>
-      <h1 data-testid="player2-title">{player2}</h1>
+    <div data-testid="game">
+      <PlayerLabel id={1} name={player1} active={player1 === activePlayer} />
+      <PlayerLabel id={2} name={player2} active={player2 === activePlayer} />
       <table>
         <tbody>
           {board.map((row, rowIndex) => (
@@ -23,3 +29,9 @@ export const Game = ({ player1, player2, board, onCellClicked }) => {
     </div>
   );
 };
+
+const PlayerLabel = ({ id, name, active }) => (
+  <h1 data-testid={`player${id}-title`} className={active ? 'bold' : undefined}>
+    {name}
+  </h1>
+);
